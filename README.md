@@ -1,3 +1,7 @@
+# PLEASE NOTE
+
+## _This Repo is here as I made changes to the codebase to make Reliable Writes work for __me__ and __your__ mileage is really going to vary as to how useful this is to you._ 
+
 # <img src="icon_small.png" width="71" height="71"/> Bluetooth LE plugin for Xamarin ![Build Status](https://app.bitrise.io/app/3fe54d0a5f43c2bf/status.svg?token=i9LUY4rIecZWd_3j7hwXgw) 
 
 Xamarin and MvvMCross plugin for accessing the bluetooth functionality. The plugin is loosely based on the BLE implementation of [Monkey Robotics](https://github.com/xamarin/Monkey.Robotics). 
