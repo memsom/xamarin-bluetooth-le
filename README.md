@@ -2,7 +2,7 @@
 
 ## _This Repo is here as I made changes to the codebase to make Reliable Writes work for __me__ and __your__ mileage is really going to vary as to how useful this is to you._ 
 
-Xamarin and MvvMCross plugin for accessing the bluetooth functionality. The plugin is loosely based on the BLE implementation of [Monkey Robotics](https://github.com/xamarin/Monkey.Robotics). 
+Xamarin plugin for accessing the bluetooth functionality. The plugin is loosely based on the BLE implementation of [Monkey Robotics](https://github.com/xamarin/Monkey.Robotics). 
 
 **Important Note:** This is a fork of the main repo. It solely exists to add Reliable Write to the library. This is only done for Android and so all othe code was removed so as to not confure things.
 
