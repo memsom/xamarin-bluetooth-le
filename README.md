@@ -231,7 +231,7 @@ The BLE API implementation (especially on **Android**) has the following limitat
 ```
 - **Avoid caching of Characteristic or Service instances between connection sessions**. This includes saving a reference to them in you class between connection sessions etc. After a device has been disconnected all Service & Characteristic instances become **invalid**. Allways **use GetServiceAsync and GetCharacteristicAsync to get a valid instance**.
  
-### General BLE iOS, Android
+### General BLE Android
 
 - Scanning: Avoid performing ble device operations like Connect, Read, Write etc while scanning for devices. Scanning is battery-intensive.
     - try to stop scanning before performing device operations (connect/read/write/etc)
@@ -250,22 +250,9 @@ The BLE API implementation (especially on **Android**) has the following limitat
     
     `nuget pack MvvmCross.Plugin.BLE.nuspec -BasePath out\lib\`
 
-
-
-## Extended topics
-
-- [How to set custom trace method?](doc/howto_custom_trace.md)
-- [Characteristic Properties](doc/characteristics.md)
-- [Scan Mode Mapping](doc/scanmode_mapping.md)
-- [iOS state restoration (basic support)](doc/ios_state_restoration.md)
-
-
 ## Useful Links
 
 - [Android Bluetooth LE guideline](https://developer.android.com/guide/topics/connectivity/bluetooth-le.html)
-- [iOS CoreBluetooth Best Practices](https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/BestPracticesForInteractingWithARemotePeripheralDevice/BestPracticesForInteractingWithARemotePeripheralDevice.html)
-- [iOS CoreBluetooth Background Modes](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/CoreBluetoothBackgroundProcessingForIOSApps/PerformingTasksWhileYourAppIsInTheBackground.html#//apple_ref/doc/uid/TP40013257-CH7-SW7)
-- [MvvmCross](https://github.com/MvvmCross)
 - [Monkey Robotics](https://github.com/xamarin/Monkey.Robotics)
 
 ## How to contribute
