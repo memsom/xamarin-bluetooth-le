@@ -2,11 +2,9 @@
 
 ## _This Repo is here as I made changes to the codebase to make Reliable Writes work for __me__ and __your__ mileage is really going to vary as to how useful this is to you._ 
 
-# <img src="icon_small.png" width="71" height="71"/> Bluetooth LE plugin for Xamarin ![Build Status](https://app.bitrise.io/app/3fe54d0a5f43c2bf/status.svg?token=i9LUY4rIecZWd_3j7hwXgw) 
-
 Xamarin and MvvMCross plugin for accessing the bluetooth functionality. The plugin is loosely based on the BLE implementation of [Monkey Robotics](https://github.com/xamarin/Monkey.Robotics). 
 
-**Important Note:** With the term *"vanilla"* we mean the non MvvmCross/pure Xamarin version. You **can** use it without MvvmCross, if you download the vanilla package.
+**Important Note:** This is a fork of the main repo. It solely exists to add Reliable Write to the library. This is only done for Android and so all othe code was removed so as to not confure things.
 
 ## Support & Limitations
 
@@ -22,8 +20,6 @@ Xamarin and MvvMCross plugin for accessing the bluetooth functionality. The plug
 **Vanilla**
 
 Currently install from source.
-
-[![NuGet](https://img.shields.io/nuget/v/Plugin.BLE.svg?label=NuGet&style=flat-square)](https://www.nuget.org/packages/Plugin.BLE) [![NuGet Beta](https://img.shields.io/nuget/vpre/Plugin.BLE.svg?label=NuGet%20Beta&style=flat-square)](https://www.nuget.org/packages/Plugin.BLE)
 
 **Android**
 
