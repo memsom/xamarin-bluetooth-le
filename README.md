@@ -13,9 +13,7 @@ Xamarin and MvvMCross plugin for accessing the bluetooth functionality. The plug
 | Platform  | Version | Limitations |
 | ------------- | ----------- | ----------- |
 | Xamarin.Android | 4.3 |  |
-| Xamarin.iOS     | 7.0 |  |
-| Xamarin.Mac     | 10.9 (Maveriks) |  >= v2.1.0 |
-| UWP             | 1709 - 10.0.16299 (Fall Creators Update) | TBA | 
+
 
 [Changelog](doc/changelog.md)
 
@@ -23,23 +21,9 @@ Xamarin and MvvMCross plugin for accessing the bluetooth functionality. The plug
 
 **Vanilla**
 
-```
-// stable
-Install-Package Plugin.BLE
-// or pre-release
-Install-Package Plugin.BLE -Pre
-```
+Currently install from source.
+
 [![NuGet](https://img.shields.io/nuget/v/Plugin.BLE.svg?label=NuGet&style=flat-square)](https://www.nuget.org/packages/Plugin.BLE) [![NuGet Beta](https://img.shields.io/nuget/vpre/Plugin.BLE.svg?label=NuGet%20Beta&style=flat-square)](https://www.nuget.org/packages/Plugin.BLE)
-
-**MvvmCross**
-
-```
-Install-Package MvvmCross.Plugin.BLE
-// or 
-Install-Package MvvmCross.Plugin.BLE -Pre
-```
-
-[![NuGet MvvMCross](https://img.shields.io/nuget/v/MvvmCross.Plugin.BLE.svg?label=NuGet%20MvvMCross&style=flat-square)](https://www.nuget.org/packages/MvvmCross.Plugin.BLE) [![NuGet MvvMCross Beta](https://img.shields.io/nuget/vpre/MvvmCross.Plugin.BLE.svg?label=NuGet%20MvvMCross%20Beta&style=flat-square)](https://www.nuget.org/packages/MvvmCross.Plugin.BLE)
 
 **Android**
 
@@ -57,74 +41,11 @@ Add this line to your manifest if you want to declare that your app is available
 <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 ````
 
-**iOS**
-
-On iOS you must add the following keys to your `Info.plist`
-
-    <key>UIBackgroundModes</key>
-    <array>
-        <!--for connecting to devices (client)-->
-        <string>bluetooth-central</string>
-    
-        <!--for server configurations if needed-->
-        <string>bluetooth-peripheral</string>
-    </array>
-    
-    <!--Description of the Bluetooth request message (required on iOS 10, deprecated)-->
-    <key>NSBluetoothPeripheralUsageDescription</key>
-    <string>YOUR CUSTOM MESSAGE</string>
-    
-    <!--Description of the Bluetooth request message (required on iOS 13)-->
-    <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>YOUR CUSTOM MESSAGE</string>
-
-## Sample app
-
-We provide a sample Xamarin.Forms app, that is a basic bluetooth LE scanner. With this app, it's possible to 
-
-- check the ble status
-- discover devices
-- connect/disconnect
-- discover the services
-- discover the characteristics
-- see characteristic details
-- read/write and register for notifications of a characteristic
-
-Have a look at the code and use it as starting point to learn about the plugin and play around with it.
-
 ## Usage  
-
-**Vanilla**
 
 ```csharp
 var ble = CrossBluetoothLE.Current;
 var adapter = CrossBluetoothLE.Current.Adapter;
-```
-
-**MvvmCross**
-
-The MvvmCross plugin registers `IBluetoothLE` and  `IAdapter` as lazy initialized singletons. You can resolve/inject them as any other MvvmCross service. You don't have to resolve/inject both. It depends on your use case.
-
-```csharp
-var ble = Mvx.Resolve<IBluetoothLE>();
-var adapter = Mvx.Resolve<IAdapter>();
-```
-or
-```csharp
-MyViewModel(IBluetoothLE ble, IAdapter adapter)
-{
-    this.ble = ble;
-    this.adapter = adapter;
-}
-```
-
-Please make sure you have this code in your LinkerPleaseLink.cs file
-
-```csharp
-public void Include(MvvmCross.Plugins.BLE.iOS.Plugin plugin)
-{
-    plugin.Load();
-}
 ```
 
 ### IBluetoothLE
@@ -211,6 +132,34 @@ var bytes = await characteristic.ReadAsync();
 #### Write characteristic
 ```csharp
 await characteristic.WriteAsync(bytes);
+```
+
+#### Reliable Write characteristic
+
+__This is experimental..__
+
+```csharp
+var byteList = new List<byte[]>();
+
+... insert data ...
+
+var transaction = characteristic.InitiateReliableWrite();
+try
+{
+    var success = false;
+    foreach(var bytes in byteList)
+    {
+       if(!await transaction.Write(bytes))  // queues wor writing
+       {
+          throw new Exception("Reliable Write failed");
+       }
+    }
+    var result = await transaction.Commit(); // this actually writes the data
+}
+catch
+{
+    transaction.RollBack();
+}
 ```
 
 #### Characteristic notifications
